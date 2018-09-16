@@ -11,6 +11,10 @@ int main()
   node2 -> setData(4);
   node<int>* node3 = new node<int>();
   node3 -> setData(5);
+
+
+
+
   list -> add(node1);
   list -> add(node2);
   list -> display();

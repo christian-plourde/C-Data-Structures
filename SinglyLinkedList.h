@@ -1,4 +1,3 @@
-//the header file for the singly linked list file
 #include <iostream>
 #include <cstddef>
 #include "SinglyLinkedListNode.h"
@@ -14,11 +13,11 @@ class SinglyLinkedList
   public:
     SinglyLinkedList(); //constructor
     void add(node<T>*); //add a node to the list
-    void remove(node<T>*); //remove a node from the list TODO
+    void remove(node<T>*); //remove a node from the list
     node<T>* search(node<T>*); //search the list for a particular node TODO
     bool contains(node<T>*); //determines if the passed node is in the list
     void clear(); //clears all the elements in the list TODO
-    void display(); //display the linked list's contents 
+    void display(); //display the linked list's contents
 
 };
 
@@ -45,6 +44,64 @@ void SinglyLinkedList<T>::add(node<T>* newNode)
 
   //increase the size of the list by one
   count++;
+}
+
+template <class T>
+void SinglyLinkedList<T>::remove(node<T>* toRemove)
+{
+  //first check if the passed node is contained in the list
+  if(this -> contains(toRemove))
+  {
+    //if the node is in the list we need to remove it
+    //start at the head
+    node<T>* currentNode = head;
+
+    //if the node to remove is the head, then we just set the head to the next node after the head
+    //and delete the pointer to remove
+
+    if(head == toRemove)
+    {
+      //move the currentNode to the next node
+      currentNode = currentNode -> getNext();
+      //set the head to the currentNode, which is the second node in the list
+      head = currentNode;
+      //decrease the count by one
+      count--;
+      //delete the pointer to the old head
+      delete toRemove;
+      toRemove = NULL;
+      return;
+    }
+
+    //if our node is not the head
+    int i = 0;
+    for(i = 0; i<count; i++)
+    {
+
+      if(currentNode -> getNext() == toRemove)
+      {
+
+        //if the next node is the one we want to remove, set the next of the node we are at to the next of the node to remove
+        currentNode -> setNext(toRemove -> getNext());
+
+        //delete the node to remove
+        delete toRemove;
+        toRemove = NULL;
+        //decrease count by one and return
+        count--;
+        return;
+      }
+
+      //move down the list
+      currentNode = currentNode -> getNext();
+    }
+  }
+
+  else
+  {
+    //otherwise we have nothing to do
+    return;
+  }
 }
 
 template <class T>

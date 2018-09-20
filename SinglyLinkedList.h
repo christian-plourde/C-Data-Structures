@@ -14,7 +14,7 @@ class SinglyLinkedList
     SinglyLinkedList(); //constructor
     void add(node<T>*); //add a node to the list
     void remove(node<T>*); //remove a node from the list
-    node<T>* search(node<T>*); //search the list for a particular node TODO
+    node<T>* search(node<T>*); //search the list for a particular node
     bool contains(node<T>*); //determines if the passed node is in the list
     void clear(); //clears all the elements in the list TODO
     void display(); //display the linked list's contents
@@ -102,6 +102,66 @@ void SinglyLinkedList<T>::remove(node<T>* toRemove)
     //otherwise we have nothing to do
     return;
   }
+}
+
+template <class T>
+node<T>* SinglyLinkedList<T>::search(node<T>* toFind)
+{
+  //a method that will search for a passed node in the list and will return null if the node is not found
+  if(count == 0)
+  {
+    return NULL;
+  }
+
+  else
+  {
+    //start at the head
+    node<T>* currentNode = head;
+
+    int i = 0;
+
+    for(i = 0; i<count; i++)
+    {
+      //for each element in the list, check if the pointers are equal.
+      if(currentNode == toFind)
+      {
+        //if they point to the same object, return true
+        return currentNode;
+      }
+
+      else
+      {
+        //otherwise, move the currentNode to the next node
+        currentNode = currentNode -> getNext();
+      }
+    }
+
+    //if we exit the loop it means it was not found
+    return NULL;
+  }
+
+}
+
+template <class T>
+void SinglyLinkedList<T>::clear()
+{
+  //method to clear everything in the linked list
+  node<T>* currentNode = head;
+  node<T>* next;
+  while(currentNode != NULL)
+  {
+    //set the next pointer to the next node in the list
+    next = currentNode -> getNext();
+    //delete the pointer to the node we are at
+    delete currentNode;
+    //then move to the next node
+    currentNode = next;
+  }
+
+  //delete the real head pointer  and set it to null and make the count 0
+  delete head;
+  head = NULL;
+  count = 0;
 }
 
 template <class T>

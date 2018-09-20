@@ -16,7 +16,7 @@ class SinglyLinkedList
     void remove(node<T>*); //remove a node from the list
     node<T>* search(node<T>*); //search the list for a particular node
     bool contains(node<T>*); //determines if the passed node is in the list
-    void clear(); //clears all the elements in the list TODO
+    void clear(); //clears all the elements in the list 
     void display(); //display the linked list's contents
 
 };
